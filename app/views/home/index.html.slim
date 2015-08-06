@@ -7,7 +7,7 @@
 .row
   - @plans.each do |plan|
     .col-lg-3.col-md-3.col-xs-6
-      ul.plan class=(plan.featured ? 'featured': '')
+      ul.plan class=(plan.featured ? 'featured': '') data-target = (new_instance_path(plan: plan.id))
         li.plan-name
           = plan.name
         - plan.metadata.each do |key, value|

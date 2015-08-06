@@ -17,6 +17,10 @@
   margin: 0 0 15px;
   background: #fff;
   text-align: center;
+  &:hover{
+      cursor: pointer;
+      background-color: #ddd;
+  }
   li {
     padding: 10px 15px;
     color: #ccc;
