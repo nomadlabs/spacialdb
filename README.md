@@ -17,7 +17,7 @@ It will handle:
 
 * Make sure you have a new ruby installed as well as the `rake` and `bundler` gems installed: `gem install bundler`
 
-* `git clone git@github.com:nomadlabs/spacialdb.git` and `cd spacialdb`
+* `git clone https://github.com/nomadlabs/spacialdb.git` and `cd spacialdb`
 
 * Edit `spacialdb/config/database.yml` if you need to add your Postgres role's username and password if you need it
 
