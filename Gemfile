@@ -35,6 +35,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
   gem 'capistrano-sidekiq'
+  gem 'net-ssh', '2.10.1.rc1'
 
   gem 'foreman'
 end
