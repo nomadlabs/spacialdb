@@ -67,3 +67,9 @@ gem 'stripe'
 gem 'stripe_event'
 
 gem 'droplet_kit'
+
+gem 'net-ssh', '!= 2.10.0'
+
+gem 'coffee-script-source', '~> 1.9.0' #if it's not added to the Gemfile Windows can't run bundle install
+
+gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin] #:x64_mingw can be changed to :_mingw if windows 32bit is used
