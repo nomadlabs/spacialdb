@@ -11,7 +11,7 @@ class InstancesController < ApplicationController
 
   def show
   end
-
+  #get the content of the form to make a new subscription
   def new
     @instance = Instance.new
     @plans = Plan.all
@@ -20,18 +20,35 @@ class InstancesController < ApplicationController
     respond_with(@instance, @plans)
   end
 
-  def create
-    logger.info instance_params
-    #does not make sense, no stripe data given to this point. 
-    params.permit!.merge(
-      stripe_token: instance_params[:stripeToken]
-    )
-    @instance = current_user.instances.new(instance_params)
-    @instance.subscription = CreateSubscription.call(params)
-    #add region to instance
-    #@instance.region_slug = region_slug
-    @instance.save
-    respond_with(@instance)
+  def create 
+
+    if not host_exists
+      #go on and do the subscription
+      logger.info instance_params
+      #too early: should better be after the checkout
+      # params.permit!.merge(
+      #   stripe_token: instance_params[:stripeToken]
+      # )
+      
+
+      #instance should better be after the payment
+      @instance = current_user.instances.new(instance_params)
+      @instance.subscription = CreateSubscription.call(params)
+      @instance.save
+      respond_with(@instance)
+    else
+      #redirect to the form to insert a new hostname
+    end
+
+
+    
+  end
+
+  #stub method- to be called from the create function
+  #should return error if the hostname already exists
+  def host_exists
+      true
+>>>>>>> Stashed changes
   end
 
   # checks that the user does not have 2 instances with the same name.
