@@ -1,8 +1,18 @@
 class Subscription < ActiveRecord::Base
   belongs_to :plan, polymorphic: true
   belongs_to :instance, polymorphic: true
+  belongs_to :region, polymorphic: true
 
   include AASM
+
+  ## Solution proposal with setter method 
+  def plan
+    Plan.new
+  end
+
+  def setPlan(newPlan)
+    @plan = newPlan
+  end
 
   aasm column: 'state', skip_validation_on_save: true do
     state :pending, initial: true
@@ -34,3 +44,5 @@ class Subscription < ActiveRecord::Base
     StartSubscription.call(self)
   end
 end
+
+# 243b26f3-70cf-4bb5-8a6c-46a6be39ef9c
