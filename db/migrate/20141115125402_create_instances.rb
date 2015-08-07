@@ -7,6 +7,7 @@ class CreateInstances < ActiveRecord::Migration
       t.string :name
       t.string :status
       t.inet :ip_address
+      t.string :region_slug
 
       t.timestamps null: false
     end

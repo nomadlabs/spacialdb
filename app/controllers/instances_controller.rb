@@ -22,14 +22,21 @@ class InstancesController < ApplicationController
 
   def create
     logger.info instance_params
+    #does not make sense, no stripe data given to this point. 
     params.permit!.merge(
       stripe_token: instance_params[:stripeToken]
     )
-
     @instance = current_user.instances.new(instance_params)
     @instance.subscription = CreateSubscription.call(params)
+    #add region to instance
+    #@instance.region_slug = region_slug
     @instance.save
     respond_with(@instance)
+  end
+
+  # checks that the user does not have 2 instances with the same name.
+  def check_hostname
+    
   end
 
   private
@@ -39,5 +46,9 @@ class InstancesController < ApplicationController
 
     def instance_params
       params[:instance]
+    end
+
+    def region_slug
+      params[:region]
     end
 end
