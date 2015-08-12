@@ -1,6 +1,4 @@
-require File.dirname(_FILE_) + '/../../test_helper.rb'
-
-class Drip::Client::Accountstest < Drip::TestCase
+class Foo::Client::Accountstest < Foo::TestCase
 	def setup
 		@stubs = Faraday::Adapter::Test::Stubs.new
 
@@ -8,14 +6,14 @@ class Drip::Client::Accountstest < Drip::TestCase
 			builder.adapter :test, @stubs
 		end
 
-		@client = Drip::Client.new
+		@client = Foo::Client.new
 		@client.expects(:connection).at_least_once.returns(@connection)
 		end
 
 context "#subscriber" do
  	   setup do
-    	 	 @id = "derrick@getdrip.com"
-     		 @response_status = 201
+    	 	 @id = "sakonet@github.com"
+     		 @response_status = 200
      		 @response_body = stub
      		 @stubs.get "12345/subscribers/#{CGI.escape @id}" do
        		 [@response_status, {}, @response_body]
