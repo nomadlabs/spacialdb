@@ -14,8 +14,16 @@ class Drip::Client::Accountstest < Drip::TestCase
 
 context "#subscriber" do
  	   setup do
-     		 @id = "derrick@getdrip.com"
+    	 	 @id = "derrick@getdrip.com"
      		 @response_status = 201
-      @response_body = stub
+     		 @response_body = stub
+     		 @stubs.get "12345/subscribers/#{CGI.escape @id}" do
+       		 [@response_status, {}, @response_body]
+     			 end
+	    end
+   		 should "is sending correct request" do
+    		  expected = Drip::Response.new(@response_status, @response_body)
+      		assert_equal expected, @client.subscriber(@id)
+   	 end
   end
 
