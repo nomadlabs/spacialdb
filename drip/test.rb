@@ -4,7 +4,7 @@ class Drip::Client::Accountstest < Drip::TestCase
 	def setup
 		@stubs = Faraday::Adapter::Test::Stubs.new
 
-		@connection = Faraday.new do builder
+		@connection = Faraday.new do |builder|
 			builder.adapter :test, @stubs
 		end
 
@@ -12,5 +12,10 @@ class Drip::Client::Accountstest < Drip::TestCase
 		@client.expects(:connection).at_least_once.returns(@connection)
 		end
 
-	context"#accounts" do
-		setup do
+context "#subscriber" do
+ 	   setup do
+     		 @id = "derrick@getdrip.com"
+     		 @response_status = 201
+      @response_body = stub
+  end
+
