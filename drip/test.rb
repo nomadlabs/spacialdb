@@ -20,8 +20,11 @@ context "#subscriber" do
      			 end
 	    end
    		 should "is sending correct request" do
-    		  expected = Drip::Response.new(@response_status, @response_body)
+    		  expected = Foo::Response.new(@response_status, @response_body)
       		assert_equal expected, @client.subscriber(@id)
    	 end
   end
 
+context "#unsubscribe" do
+
+end
