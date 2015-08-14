@@ -26,5 +26,18 @@ context "#subscriber" do
   end
 
 context "#unsubscribe" do
+    setupt do
+	@id= "sakonet@github.com"
+	@respone_status=200
+	@response_body=stub
 
+        @stubs.post "12345/subscribers/#{CGI.escape @id}/unsubscribe" do
+          [@response_status, {}, @response_body]
+        end
+      end
+      should "send the right request" do
+        expected = Git::Response.new(@response_status, @response_body)
+        assert_equal expected, @client.unsubscribe(@id)
+      end
+    end
 end
