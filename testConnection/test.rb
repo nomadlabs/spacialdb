@@ -19,9 +19,8 @@ context "#subscriber" do
        		 [@response_status, {}, @response_body]
      			 end
 	    end
-   		 should "is sending correct request" do
+   		 do
     		  expected = Foo::Response.new(@response_status, @response_body)
-      		assert_equal expected, @client.subscriber(@id)
    	 end
   end
 
@@ -35,9 +34,9 @@ context "#unsubscribe" do
           [@response_status, {}, @response_body]
         end
       end
-      should "send the right request" do
+       do
         expected = Git::Response.new(@response_status, @response_body)
-        assert_equal expected, @client.unsubscribe(@id)
+       
       end
     end
 end
