@@ -48,7 +48,6 @@ class InstancesController < ApplicationController
   #should return error if the hostname already exists
   def host_exists
       true
->>>>>>> Stashed changes
   end
 
   # checks that the user does not have 2 instances with the same name.
