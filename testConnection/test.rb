@@ -8,6 +8,7 @@ class Foo::Client::Accountstest < Foo::TestCase
 
 		@client = Foo::Client.new
 		@client.expects(:connection).at_least_once.returns(@connection)
+		 assert_equal expected, @client.subscribe(@email, @campaign_id, @data)
 		end
 
 context "#subscriber" do
@@ -21,7 +22,8 @@ context "#subscriber" do
 	    end
    		 do
     		  expected = Foo::Response.new(@response_status, @response_body)
-   	 end
+   		 assert_equal expected, @client.subscribe(@email, @campaign_id, @data) 
+	end
   end
 
 context "#unsubscribe" do
@@ -36,7 +38,7 @@ context "#unsubscribe" do
       end
        do
         expected = Git::Response.new(@response_status, @response_body)
-       
+          assert_equal expected, @client.subscribe(@email, @campaign_id, @data)       
       end
     end
 end
