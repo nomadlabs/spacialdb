@@ -52,8 +52,7 @@ end
         [@response_status, {}, @response_body]
       end
     end
-    should "send the right request" do
-      expected = Git::Response.new(@response_status, @response_body)
+     expected = Git::Response.new(@response_status, @response_body)
       assert_equal expected, @client.subscribe(@email, @campaign_id, @data)
     end
   end
