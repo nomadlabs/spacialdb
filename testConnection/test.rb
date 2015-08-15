@@ -40,3 +40,20 @@ context "#unsubscribe" do
       end
     end
 end
+
+  context "#subscribe" do
+    setup do
+      @email = "sakonet@github.com"
+      @campaign_id = "12345"
+      @payload = { "subscribers" => [@data.merge(:email => @email)] }.to_json
+      @response_status = 201
+      @response_body = stub
+      @stubs.post "12345/campaigns/#{@campaign_id}/subscribers", @payload do
+        [@response_status, {}, @response_body]
+      end
+    end
+    should "send the right request" do
+      expected = Git::Response.new(@response_status, @response_body)
+      assert_equal expected, @client.subscribe(@email, @campaign_id, @data)
+    end
+  end
