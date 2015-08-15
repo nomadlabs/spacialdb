@@ -14,7 +14,7 @@ class Foo::Client::Accountstest < Foo::TestCase
 context "#subscriber" do
  	   setup do
     	 	 @id = "sakonet@github.com"
-     		 @response_status = 200
+     		 @response_status = 201
      		 @response_body = stub
      		 @stubs.get "12345/subscribers/#{CGI.escape @id}" do
        		 [@response_status, {}, @response_body]
@@ -29,7 +29,7 @@ context "#subscriber" do
 context "#unsubscribe" do
     setupt do
 	@id= "sakonet@github.com"
-	@respone_status=200
+	@respone_status=201
 	@response_body=stub
 
         @stubs.post "12345/subscribers/#{CGI.escape @id}/unsubscribe" do
