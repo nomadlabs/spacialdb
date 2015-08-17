@@ -58,3 +58,20 @@ end
       assert_equal expected, @client.subscribe(@email, @campaign_id, @data)
     end
   end
+
+    context "if a campaign id is provided" do
+      setup do
+        @id = "sakonet@github.com"
+        @campaign = "12345"
+        @response_status = 200
+        @response_body = stub
+        @stubs.post "12345/subscribers/#{CGI.escape @id}/unsubscribe?campaign_id=#{@campaign}" do
+          [@response_status, {}, @response_body]
+        end
+      end
+      should "send the right request" do
+        expected = Drip::Response.new(@response_status, @response_body)
+        assert_equal expected, @client.unsubscribe(@id, campaign_id: @campaign)
+      end
+    end
+  end
