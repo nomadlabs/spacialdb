@@ -54,7 +54,6 @@ end
         [@response_status, {}, @response_body]
       end
     end
-     expected = Git::Response.new(@response_status, @response_body)
       assert_equal expected, @client.subscribe(@email, @campaign_id, @data)
     end
   end
