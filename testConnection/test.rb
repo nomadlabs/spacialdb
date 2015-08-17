@@ -65,6 +65,11 @@ end
         @campaign = "12345"
         @response_status = 200
         @response_body = stub
+@payload = { "subscribers" => [@data.merge(:email => @email)] }.to_json
+      @stubs.post "12345/subscribers", @payload do
+        [@response_status, {}, @response_body]
+      end
+    end
         @stubs.post "12345/subscribers/#{CGI.escape @id}/unsubscribe?campaign_id=#{@campaign}" do
           [@response_status, {}, @response_body]
         end
