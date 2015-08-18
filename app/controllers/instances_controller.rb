@@ -21,24 +21,20 @@ class InstancesController < ApplicationController
   end
 
   def create 
+    #go on and do the subscription
+    logger.info instance_params
+    #too early: should better be after the checkout
+    params.permit!.merge(
+      stripe_token: instance_params[:stripeToken]
+    )
+    
 
-    if not host_exists
-      #go on and do the subscription
-      logger.info instance_params
-      #too early: should better be after the checkout
-      # params.permit!.merge(
-      #   stripe_token: instance_params[:stripeToken]
-      # )
-      
-
-      #instance should better be after the payment
-      @instance = current_user.instances.new(instance_params)
-      @instance.subscription = CreateSubscription.call(params)
-      @instance.save
-      respond_with(@instance)
-    else
-      #redirect to the form to insert a new hostname
-    end
+    #instance should better be after the payment
+    @instance = current_user.instances.new(instance_params)
+    @instance.subscription = CreateSubscription.call(params)
+    @instance.region_id = get_region_id
+    @instance.save
+    respond_with(@instance)
 
 
     
@@ -64,7 +60,8 @@ class InstancesController < ApplicationController
       params[:instance]
     end
 
-    def region_slug
-      params[:region]
+    def get_region_id
+      theslug = params[:region]
+      Region.find_by(slug: theslug).id
     end
 end
