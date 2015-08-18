@@ -24,7 +24,7 @@ script src="//checkout.stripe.com/checkout.js"
         - for region in @regions
           .radio
             label
-              = radio_button_tag 'region', region.slug
+              = radio_button_tag 'region', region.slug, checked = (region.slug == @region)
               strong = region.name
   .form-group
     .col-sm-offset-2.col-sm-10
