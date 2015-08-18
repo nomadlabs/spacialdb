@@ -1,0 +1,59 @@
+$('new-instance-form').click(function(){
+  var token = function(tok){
+    var $input = $("<input type='hidden' name='stripeToken' />").
+    val(tok.id);
+  }
+})
+/   $('#new-instance-form').bootstrapValidator({
+/     fields: {
+/       'instance[name]': {
+/         validators: {
+/           notEmpty: {
+/             message: 'The hostname is required.'
+/           }
+/         }
+/       },
+/       plan: {
+/         validators: {
+/           notEmpty: {
+/             message: 'Please select a plan.'
+/           }
+/         }
+/       },
+/       region: {
+/         validators: {
+/           notEmpty: {
+/             message: 'Please select a region.'
+/           }
+/         }
+/       }
+/     }
+/   }).on('success.form.bv', function(e) {
+/     e.preventDefault();
+/     var form = $(e.target);
+/     var bv = form.data('bootstrapValidator');
+
+/     var handler = StripeCheckout.configure({
+/       key: '#{{Rails.application.secrets.stripe_publishable_key}}',
+/       token: function(token) {
+/         // Use the token to create the charge with a server-side script.
+/         // You can access the token ID with `token.id`
+/         form.append($('<input type="hidden" name="stripeToken" />').val(token.id));
+/         bv.defaultSubmit();
+/       }
+/     });
+
+/     handler.open({
+/       name: 'SpacialDB UG',
+/       currency: 'EUR',
+/       description: 'Monthly Subscription',
+/       email: '#{{current_user.email}}',
+/       panelLabel: "Subscribe",
+/       amount: $('input:radio[name=plan]:checked').val()
+/     });
+
+/     // Close Checkout on page navigation
+/     $(window).on('popstate', function() {
+/       handler.close();
+/     });
+/   });
