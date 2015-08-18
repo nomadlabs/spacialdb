@@ -28,23 +28,14 @@ class InstancesController < ApplicationController
       stripe_token: instance_params[:stripeToken]
     )
     
-
     #instance should better be after the payment
     @instance = current_user.instances.new(instance_params)
     @instance.subscription = CreateSubscription.call(params)
     @instance.region_id = get_region_id
     @instance.save
-    respond_with(@instance)
-
-
-    
+    respond_with(@instance)   
   end
 
-  #stub method- to be called from the create function
-  #should return error if the hostname already exists
-  def host_exists
-      true
-  end
 
   # checks that the user does not have 2 instances with the same name.
   def check_hostname

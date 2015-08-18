@@ -1,7 +1,7 @@
 script src="//checkout.stripe.com/checkout.js"
 
 = form_for @instance, url: {action: "create"}, html: {class: 'form-horizontal', role: 'form', id: 'new-instance-form' } do |f|
-  = render 'devise/shared/error_messages', object: f.object
+  == render 'devise/shared/error_messages'
   .form-group
     = f.label :hostname, class: "col-sm-2 control-label"
     .col-sm-6
