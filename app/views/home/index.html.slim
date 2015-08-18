@@ -1,8 +1,11 @@
 .jumbotron
-  h1 PostGIS in a minute!
-  p. Provision a PostGIS instance in the cloud and start developing your awesome geospatial applications.
-  p
-    = button_to "Sign up", new_registration_path(:user), method: :get, class: 'btn btn-lg btn-success'
+  
+  - if user_signed_in?
+      .h1  Choose your plan now:
+  - else
+      .h1 PostGIS in a minute!
+      .p Provision a PostGIS instance in the cloud and start developing your awesome geospatial applications.
+      = button_to "Sign up", new_registration_path(:user), method: :get, class: 'btn btn-lg btn-success'
 
 .row
   - @plans.each do |plan|
