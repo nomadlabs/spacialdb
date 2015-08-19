@@ -93,4 +93,10 @@ end
       @stubs.post "12345/tags", @payload do
         [@response_status, {}, @response_body]
       end
+    should "send the right request" do
+      expected = Github::Response.new(@response_status, @response_body)
+      assert_equal expected, @client.apply_tag(@email, @tag)
+    end
+  end
+end
     end
