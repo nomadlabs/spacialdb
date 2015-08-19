@@ -2,6 +2,7 @@ class InstancesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_global, only: [:new, :create]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
+  before_action :current_region, only: [:show, :edit]
   respond_to :html
 
   def index
@@ -18,6 +19,9 @@ class InstancesController < ApplicationController
     respond_with(@instance, @plans)
   end
 
+  def edit
+  end
+
   def create 
     #go on and do the subscription
     logger.info instance_params
@@ -29,6 +33,11 @@ class InstancesController < ApplicationController
     @instance.region_id = get_region_id 
     flash[:notice] = 'Instance was successfully created.' if @instance.save
     respond_with(@instance)
+  end
+
+  def destroy
+    #Instand.find(params[:id]).delete/destroy 
+    redirect_to instances_path
   end
 
   private
@@ -47,6 +56,10 @@ class InstancesController < ApplicationController
 
     def instance_params
       params[:instance]
+    end
+
+    def current_region
+      @myRegion = Region.find(@instance[:region_id])
     end
 
     def get_region_id

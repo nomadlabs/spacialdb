@@ -1,0 +1,6 @@
+<h1>Select the details you'd like to modify:</h1>
+	<span> Name: <%= @instance[:name] %></span><br>
+    <span> Plan: <%= number_to_currency((@instance[:plan].to_i/ 100), :unit => "€") %> &euro;</span><br>
+    <span> Region: <%= @myRegion.name %></span><br><br>
+ 
+<%= link_to "Back to instances", instances_path %>
