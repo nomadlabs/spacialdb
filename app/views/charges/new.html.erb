@@ -15,7 +15,8 @@
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-currency='EUR'
           data-description="A month's subscription"
-          data-amount="500"></script>
+          data-amount=<%= @instance_info[:plan]%>></script>
 <% end %>
 
