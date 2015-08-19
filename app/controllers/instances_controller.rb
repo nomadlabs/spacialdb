@@ -19,33 +19,16 @@ class InstancesController < ApplicationController
   end
 
   def create 
-
     #go on and do the subscription
     logger.info instance_params
-    #too early: should better be after the checkout
-    # params.permit!.merge(
-    #   stripe_token: instance_params[:stripeToken]
-    # )
-    params.permit!    
-
-    #instance should better be after the payment
-    @instance = current_user.instances.new(instance_params)
+    params.permit!.merge(
+      stripe_token: params[:stripeToken]
+    )    
+    @instance = current_user.instances.new(name: instance_params)
     @instance.subscription = CreateSubscription.call(params)
     @instance.region_id = get_region_id 
-    @instance.save
+    flash[:notice] = 'Instance was successfully created.' if @instance.save
     respond_with(@instance)
-
-  end
-
-  #stub method- to be called from the create function
-  #should return error if the hostname already exists
-  def host_exists
-      true
-  end
-
-  # checks that the user does not have 2 instances with the same name.
-  def check_hostname
-    
   end
 
   private
