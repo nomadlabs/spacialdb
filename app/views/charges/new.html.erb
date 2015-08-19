@@ -1,0 +1,19 @@
+<%= form_tag instances_path do %>
+<%= hidden_field_tag("region", @instance_info[:region]) %>
+<%= hidden_field_tag("plan", @instance_info[:plan]) %>
+<%= hidden_field_tag("instance", @instance_info[:instance][:name]) %>
+<%= hidden_field_tag("authenticity_token", @instance_info[:authenticity_token]) %>
+  <article>
+    <label class="amount">
+      <span>Amount: $5.00</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="500"></script>
+<% end %>
+
+
+
