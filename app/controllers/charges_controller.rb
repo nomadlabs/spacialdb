@@ -3,6 +3,7 @@ class ChargesController < ApplicationController
 
 	def new
 	  @instance_info = params.dup
+	  @region = Region.find_by(slug: @instance_info[:region])
 	  respond_with(@instance_info)
 	end
 
