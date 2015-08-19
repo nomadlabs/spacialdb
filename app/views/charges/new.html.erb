@@ -1,15 +1,11 @@
 
-<%= form_tag instances_path do %>
-<%= hidden_field_tag("region", @instance_info[:region]) %>
-<%= hidden_field_tag("plan", @instance_info[:plan]) %>
-<%= hidden_field_tag("instance", @instance_info[:instance][:name]) %>
-<%= hidden_field_tag("authenticity_token", @instance_info[:authenticity_token]) %>
+<%= form_tag @instance.id, method: :get do %>
   <article>
     <label class="amount">
-        <h1> Your chose the following plan:</h1>
-        <span> Name: <%= @instance_info[:instance][:name] %></span><br>
-          <span>Amount: <%= number_to_currency((@instance_info[:plan].to_i/ 100), :unit => "€") %> &euro;</span><br>
-          <span> Region: <%= @region[:name] %></span><br>
+        <h1> You chose the following plan:</h1>
+        <span> Name: <%= @instance[:name] %></span><br>
+          <span>Amount: <%= number_to_currency((@instance[:plan].to_i/ 100), :unit => "€") %> </span><br>
+          <span> Region: <%= @myRegion[:name] %></span><br>
     </label>
   </article>
 
@@ -17,6 +13,6 @@
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-currency='EUR'
           data-description="A month's subscription"
-          data-amount=<%= @instance_info[:plan]%>></script>
+          data-amount=<%= @instance[:plan]%>>
+  </script>
 <% end %>
-

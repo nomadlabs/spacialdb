@@ -11,6 +11,11 @@ class InstancesController < ApplicationController
   end
 
   def show
+    if params[:stripeToken] && @instance[:status] == "unpaid"
+      @instance[:status] = "paid"
+      @instance.save!
+      flash[:notice] = 'You have successfully paid.'
+    end
   end
 
   #get the content of the form to make a new subscription
@@ -23,20 +28,20 @@ class InstancesController < ApplicationController
   end
 
   def create 
-    #go on and do the subscription
     logger.info instance_params
     params.permit!.merge(
       stripe_token: params[:stripeToken]
     )    
-    @instance = current_user.instances.new(name: instance_params)
+    @instance = current_user.instances.new(instance_params)
     @instance.subscription = CreateSubscription.call(params)
+    @instance.status = "unpaid"
     @instance.region_id = get_region_id 
     flash[:notice] = 'Instance was successfully created.' if @instance.save
     respond_with(@instance)
   end
 
   def destroy
-    #Instand.find(params[:id]).delete/destroy 
+    @instance.destroy
     redirect_to instances_path
   end
 

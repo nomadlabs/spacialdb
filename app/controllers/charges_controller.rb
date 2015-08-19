@@ -2,9 +2,6 @@ class ChargesController < ApplicationController
 	respond_to :html
 
 	def new
-	  @instance_info = params.dup
-	  @region = Region.find_by(slug: @instance_info[:region])
-	  respond_with(@instance_info)
 	end
 
 	def create
@@ -22,8 +19,7 @@ class ChargesController < ApplicationController
 	    :description => 'Rails Stripe customer',
 	    :currency    => 'usd'
 	  )
-	  redirect_to instances_path
-
+	
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message
 	  redirect_to charges_path

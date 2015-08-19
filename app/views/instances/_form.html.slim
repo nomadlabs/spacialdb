@@ -1,4 +1,4 @@
-= form_for @instance, url: new_charge_path, method: "GET", html: {class: 'form-horizontal', role: 'form', id: 'new-instance-form' } do |f|
+= form_for @instance, url: instances_path, method: "POST", html: {class: 'form-horizontal', role: 'form', id: 'new-instance-form' } do |f|
   == render 'devise/shared/error_messages'
   .form-group
     = f.label :hostname, class: "col-sm-2 control-label"
@@ -27,7 +27,7 @@
   .form-group
     .col-sm-offset-2.col-sm-10
       / button#checkout.btn.btn-primary type="submit"  New Instance
-      = button_to 'Pay now', new_charge_path, class: 'btn btn-lg btn-success', id:'checkout', type: 'submit' 
+      = button_to 'Pay now', instances_path, class: 'btn btn-lg btn-success', id:'checkout', type: 'submit' 
 
 
 

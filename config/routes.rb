@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   mount StripeEvent::Engine => '/events'
   root 'home#index'
+
+  get 'show_instance' => 'instances#show'
 end
