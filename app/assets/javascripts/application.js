@@ -16,16 +16,41 @@
 //= require bootstrapValidator.min
 //= require_tree .
 
+var ready;
 
-// ready = ->
-// 	$(".media").on "click", ->
-// 		document.location = $(this).data("target")
-// 		return false
+ready = function() {
+  $(".plan").on("click", function() {
+    document.location = $(this).data("target");
+    return false;
+  });
 
-// 	$(".modal").on "shown.bs.modal", -> 
-// 		$(this).find("textarea").focus()
+  $('#new-instance-form').bootstrapValidator({
+    fields: {
+      'instance[name]': {
+        validators: {
+          notEmpty: {
+            message: 'The hostname is required.'
+          }
+        }
+      },
+      plan: {
+        validators: {
+          notEmpty: {
+            message: 'Please select a plan.'
+          }
+        }
+      },
+      region: {
+        validators: {
+          notEmpty: {
+            message: 'Please select a region.'
+          }
+        }
+      }
+    }
+  });
+};
 
-// $(document).ready(ready)
-// $(document).on "page:load", ready
+$(document).ready(ready);
 
-
+$(document).on("page:load", ready);
