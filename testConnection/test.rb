@@ -1,4 +1,7 @@
-class Foo::Client::Accountstest < Foo::TestCase
+require File.dirname(__FILE__) + '/../../test_helper.rb'
+require "faraday"
+
+class Foo::Client::
 	def setup
 		@stubs = Faraday::Adapter::Test::Stubs.new
 
@@ -79,3 +82,15 @@ end
       end
     end
   end
+
+  context "#apply_tag" do
+    setup do
+      @email = "sakonet@github.com"
+      @tag = "Customer"
+      @payload = { "tags" => [{ "email" => @email, "tag" => @tag }] }.to_json
+      @response_status = 201
+      @response_body = stub
+      @stubs.post "12345/tags", @payload do
+        [@response_status, {}, @response_body]
+      end
+    end
