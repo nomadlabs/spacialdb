@@ -3,6 +3,7 @@ class InstancesController < ApplicationController
   before_action :set_global, only: [:new, :create, :edit]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
   before_action :current_region, only: [:show, :edit]
+  before_action :get_plan, only: [:show, :edit, :update]
   respond_to :html
 
   def index
@@ -28,15 +29,24 @@ class InstancesController < ApplicationController
     
   end
 
-  def update
-    params.permit(:instance, :region)
-    if @instance.update_attributes(name: params[:instance][:name], region_id: get_region_id )
-      flash[:notice] = 'Instance was successfully updated.'
-      redirect_to @instance
-    else 
-      flash[:error] =  "Hostname not valid."
-      redirect_to edit_instance_path(@instance)     
-    end 
+  
+ def update
+    params.permit(:instance, :region, :plan)
+    new_plan_id = Plan.find_by(amount: params[:plan]).id
+    if @instance.update_attributes(name: params[:instance][:name], region_id: get_region_id)
+      # TODO: When changing plan -> change stripe payment plan. 
+      # if downsizing, we should check that current_user.occupied_memory <= new_plan.memory 
+      if @instance.subscription.update_attributes(plan_id: new_plan_id) 
+        flash[:notice] = 'Instance was successfully updated.'
+        redirect_to @instance
+      else
+        flash[:error] = 'Plan could not be updated.'
+        redirect_to edit_instance_path(@instance) 
+      end 
+    else
+      flash[:error] = 'Hostname not valid.'
+      redirect_to edit_instance_path(@instance)
+    end
   end
 
   def create 
@@ -83,4 +93,10 @@ class InstancesController < ApplicationController
       leslug = params[:region]
       Region.find_by(slug: leslug).id
     end
+
+    def get_plan
+      leplan_id = @instance.subscription.plan_id
+      @myPlan = Plan.find_by(id: leplan_id)
+    end
+
 end
