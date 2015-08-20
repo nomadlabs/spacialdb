@@ -1,6 +1,6 @@
 class InstancesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_global, only: [:new, :create]
+  before_action :set_global, only: [:new, :create, :edit]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
   before_action :current_region, only: [:show, :edit]
   respond_to :html
@@ -25,6 +25,13 @@ class InstancesController < ApplicationController
   end
 
   def edit
+    
+  end
+
+  def update
+    params.permit(:instance, :region)
+    @instance.update_attributes(name: params[:instance][:name], region_id: get_region_id )
+    redirect_to @instance
   end
 
   def create 
