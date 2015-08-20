@@ -1,22 +1,30 @@
 .row
-  .col-md-2.sidebar
-    = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
-
   .col-md-10
     h1 Instances
 
-    table class="table"
-      thead
-        tr
-          th Name
-          th
-          th
-          th
-
-      tbody
-        - @instances.each do |instance|
+    - if @instances.empty?
+          = "You don't have any instances, create one!"
+          br
+          br
+          = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
+    
+    -else
+      table class="table"
+        thead
           tr
-            td = instance.name
-            td = link_to 'Show', instance
-            td = link_to 'Edit', edit_instance_path(instance)
-            td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
+            th Name
+            th
+            th
+            th
+
+        tbody
+          - @instances.each do |instance|
+            tr
+              td = instance.name
+              td = link_to 'Show', instance
+              td = link_to 'Edit', edit_instance_path(instance)
+              td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
+    br
+    br
+    = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
+          
