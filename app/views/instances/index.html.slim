@@ -8,7 +8,7 @@
     table class="table"
       thead
         tr
-          th ID
+          th Name
           th
           th
           th
@@ -16,7 +16,7 @@
       tbody
         - @instances.each do |instance|
           tr
-            td = instance.id
+            td = instance.name
             td = link_to 'Show', instance
             td = link_to 'Edit', edit_instance_path(instance)
             td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
