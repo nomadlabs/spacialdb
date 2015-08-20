@@ -4,7 +4,7 @@
 
 	<h1>Your instance is:</h1>
 	    <span> Name: <%= @instance[:name] %></span><br>
-	    <span>Amount: <%= number_to_currency((@instance[:plan].to_i/ 100), :unit => "€") %> &euro;</span><br>
+	    <span>Amount: <%= number_to_currency((@myPlan.amount.to_i/ 100), :unit => "€") %> </span><br>
 	    <span> Region: <%= @myRegion.name %></span><br>
 	    <span> IP Address: <%= @instance[:ip_address] %> </span><br>
 	    <span> Created_at: <%= @instance[:created_at] %> </span><br><br> 
