@@ -15,6 +15,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
           a href="#about"  About
         li
           a href="#contact"  Contact
+        li
+          - if user_signed_in?
+            a href="/instances"  Instances
       ul.nav.navbar-nav.navbar-right
         li
           - if user_signed_in?
