@@ -31,6 +31,7 @@ class InstancesController < ApplicationController
   def update
     params.permit(:instance, :region)
     @instance.update_attributes(name: params[:instance][:name], region_id: get_region_id )
+    flash[:notice] = 'Instance was successfully updated.'
     redirect_to @instance
   end
 
