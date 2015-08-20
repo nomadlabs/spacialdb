@@ -1,24 +1,25 @@
-h1 Edit your Instance:
+h1 Edit your instance:
+br
 = form_for @instance, url: instance_path(@instance), method: "PATCH", html: {class: 'form-horizontal', role: 'form', id: 'new-instance-form' } do |f|
   == render 'devise/shared/error_messages'
   .form-group
-    = f.label :Yourhostname, class: "col-sm-2 control-label"
+    = f.label 'my name:', class: "col-sm-2 control-label"
     .col-sm-6
       = f.text_field :name, class: "form-control", autofocus: true, value: @instance[:name]
   .form-group
-      = f.label :plan, class: "col-sm-2 control-label"
+      = f.label 'my plan', class: "col-sm-2 control-label"
       .col-sm-6
         - for plan in @plans
           .radio
             label
-              = radio_button_tag 'plan', plan.amount, checked = (plan.id == @plan.id)
+              = radio_button_tag 'plan', plan.amount, checked = (plan.id == @myPlan.id)
               strong = plan.name
               = ": " + plan.metadata['Memory'] + " Memory, "
               = plan.metadata['Processor'] + " Processor, "
               = plan.metadata['Storage'] + " Storage and "
               = plan.metadata['Bandwidth'] + " Bandwidth"
   .form-group
-      = f.label :region, class: "col-sm-2 control-label"
+      = f.label 'my region', class: "col-sm-2 control-label"
       .col-sm-6
         - for region in @regions
           .radio
@@ -28,5 +29,6 @@ h1 Edit your Instance:
   .form-group
     .col-sm-offset-2.col-sm-10
       = button_to 'Update Instance', instance_path(@instance), class: 'btn btn-lg btn-success', id:'edit', type: 'submit' 
-
-= link_to "Back to instances", instances_path
+      br
+      br
+	  = link_to "Back to instances", instances_path
