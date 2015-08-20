@@ -18,7 +18,7 @@
             strong = value
             |  #{key}
         li.plan-action
-          = link_to "Sign up",
+          = link_to @button_name,
             new_instance_path(plan: plan.id),
             class: plan.featured ? "btn btn-lg btn-success" : "btn btn-default"
 
