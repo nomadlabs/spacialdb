@@ -4,10 +4,6 @@
 
     - if @instances.empty?
           = "You don't have any instances, create one!"
-          br
-          br
-          = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
-    
     -else
       table class="table"
         thead
@@ -27,4 +23,3 @@
     br
     br
     = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
-          
