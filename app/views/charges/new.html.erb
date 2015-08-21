@@ -1,7 +1,9 @@
 
-<%= form_tag @instance.id, method: :get do %>
+<%= form_tag charges_path, method: :post do %>
   <article>
     <label class="amount">
+        <!-- Pass instance id to charges controller -->
+        <%= hidden_field_tag "instance_id", @instance[:id] %>
         <h1> Please pay for your instance:</h1>
         <span> Name: <%= @instance[:name] %></span><br>
         <span>Amount: <%= number_to_currency((@myPlan.amount.to_i/ 100), :unit => "€") %> </span><br>
