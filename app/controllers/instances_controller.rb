@@ -12,11 +12,6 @@ class InstancesController < ApplicationController
   end
 
   def show
-    if params[:stripeToken] && @instance[:status] == "unpaid"
-      @instance[:status] = "paid"
-      @instance.save!
-      flash[:notice] = 'You have successfully paid.'
-    end
   end
 
   #get the content of the form to make a new subscription
