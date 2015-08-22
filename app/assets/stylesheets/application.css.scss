@@ -2,16 +2,35 @@
 @import "bootstrap";
 @import "bootstrapValidator.min";
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   padding-top: 60px;
   background-color: #f5f5f5;
+  margin-bottom: 100px;
 }
 
 .footer {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: 40px;
   border-top: 1px solid #eee;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+
+.inner {
+  text-align: center;
+}
+
+.text-muted {
+  margin: 20px;
 }
 
 @import "home";
