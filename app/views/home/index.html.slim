@@ -1,13 +1,16 @@
 .jumbotron
-  h1 PostGIS in a minute!
-  p. Provision a PostGIS instance in the cloud and start developing your awesome geospatial applications.
-  p
-    = button_to "Sign up", new_registration_path(:user), method: :get, class: 'btn btn-lg btn-success'
+
+  - if user_signed_in?
+      .h1  Hi, choose your plan now!
+  - else
+      .h1 PostGIS in a minute!
+      .p Provision a PostGIS instance in the cloud and start developing your awesome geospatial applications.
+      = button_to "Sign up", new_registration_path(:user), method: :get, class: 'btn btn-lg btn-success'
 
 .row
   - @plans.each do |plan|
     .col-lg-3.col-md-3.col-xs-6
-      ul.plan class=(plan.featured ? 'featured': '')
+      ul.plan class=(plan.featured ? 'featured': '') data-target = (new_instance_path(plan: plan.id))
         li.plan-name
           = plan.name
         - plan.metadata.each do |key, value|
@@ -15,40 +18,90 @@
             strong = value
             |  #{key}
         li.plan-action
-          = link_to "Sign up",
+          = link_to @button_name,
             new_instance_path(plan: plan.id),
             class: plan.featured ? "btn btn-lg btn-success" : "btn btn-default"
 
 .row.marketing
   .h2 All Plans include
   .col-lg-6
-    h4 Uptime
-    p 99.99% Uptime SLA.
-    h4 Disks
-    p Solid-State Drives (SSD).
-    h4 Multiple Datacenter Locations
-    p Select the best US, Europe or Asia location based on latency.
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-time
+      .media-body
+        .h4.media-heading Uptime
+        p 99.99% Uptime SLA.
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-hdd
+      .media-body
+        .h4.media-heading Disks
+        p Solid-State Drives (SSD).
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-map-marker
+      .media-body
+        .h4.media-heading Multiple Datacenter Locations
+        p Select the best US, Europe or Asia location based on latency.
   .col-lg-6
-    h4 PostgreSQL
-    p PostgreSQL 9.4.1 with all the extensions and data-types.
-    h4 Latest PostGIS
-    p PostGIS 2.1 with Topology, Raster and Tiger Geocoder extensions.
-    h4 Admin Role
-    p Admin role to create as many users and databases you like.
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-menu-hamburger
+      .media-body
+        .h4.media-heading PostgreSQL
+        p PostgreSQL 9.4.1 with all the extensions and data-types.
+
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-globe
+      .media-body
+        .h4.media-heading Latest PostGIS
+        p PostGIS 2.1 with Topology, Raster and Tiger Geocoder extensions
+
+    .media
+      .media-left
+        .i.glyphicon.glyphicon-cog
+      .media-body
+        .h4.media-heading Admin Role
+        p Admin role to create as many users and databases you like.
 
 .row.marketing
   .h2 Pricing FAQ
   .col-lg-6
-    h4 How am I billed?
-    p Each database instance is billed hourly up to its monthly cost.
-    h4 Am I charged when I enter a credit card?
-    p No you are charged at the end of each month. We use your credit card to verify adequate funds.
-    h4 How do I cancel my subscription?
-    p You may cancel your subscription any time and we will only charge for the hours your database instance was alive.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading How am I billed?
+        span Each database instance is billed hourly up to its monthly cost.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading Am I charged when I enter a credit card?
+        span No you are charged at the end of each month. We use your credit card to verify adequate funds.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading How do I cancel my subscription?
+        span You may cancel your subscription any time and we will only charge for the hours your database instance was alive.
   .col-lg-6
-    h4 What form of payments do you accept?
-    p We accept Visa, MasterCard, American Express, and Discover.
-    h4 Do you offer refunds?
-    p No, we do not offer refunds.
-    h4 How much is additional bandwidth?
-    p Additional bandwidth transfer is only 2¢ per GB.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading What form of payments do you accept?
+        span We accept Visa, MasterCard, American Express, and Discover.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading Do you offer refunds?
+        span No, we do not offer refunds.
+    .media
+      .media-left
+        i.glyphicon.glyphicon-chevron-right
+      .media-body.media-middle
+        .h4.media-heading How much is additional bandwidth?
+        span Additional bandwidth transfer is only 2¢ per GB.
