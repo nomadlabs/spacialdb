@@ -3,7 +3,7 @@
     h1 Instances
 
     - if @instances.empty?
-          = "You don't have any instances, create one!"
+      = "You don't have any instances, create one!"
     - else
       table class="table table-striped"
         thead
@@ -22,7 +22,7 @@
               td = instance.region.name
               td
                 - if instance.status == "unpaid"
-                  span.label.label-warning unpaid
+                  span.label.label-danger unpaid
                 - if instance.status == "paid"
                   span.label.label-success paid
               td = link_to 'Show', instance
