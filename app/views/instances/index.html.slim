@@ -4,11 +4,13 @@
 
     - if @instances.empty?
           = "You don't have any instances, create one!"
-    -else
-      table class="table"
+    - else
+      table class="table table-striped"
         thead
           tr
             th Name
+            th Region
+            th Payment
             th
             th
             th
@@ -17,6 +19,12 @@
           - @instances.each do |instance|
             tr
               td = instance.name
+              td = instance.region.name
+              td
+                - if instance.status == "unpaid"
+                  span.label.label-warning unpaid
+                - if instance.status == "paid"
+                  span.label.label-success paid
               td = link_to 'Show', instance
               td = link_to 'Edit', edit_instance_path(instance)
               td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
