@@ -9,31 +9,20 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
       a.navbar-brand href=root_path  SpacialDB
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        - if params[:controller] == 'home'
-          li.active
-            a href="/"  Home
-        - else
-          li
-            a href="/"  Home
-
+        li class=('active' if controller_name == 'home')
+          a href="/"  Home
         li
           a href="#about"  About
         li
           a href="#contact"  Contact
-
-        - if user_signed_in?
-          - if params[:controller] == 'instances'
-            li.active
-              a href="/instances"  Instances
-          - else
-            li
-              a href="/instances"  Instances
-
+        li class=('active' if controller_name == 'instances')
+          - if user_signed_in?
+            a href="/instances"  Instances
       ul.nav.navbar-nav.navbar-right
         li
           - if user_signed_in?
             .navbar-text.glyphicon.glyphicon-user.no-margin-right
-            li.navbar-text signed in as #{{current_user.email}}
-            li = button_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-default navbar-btn'
+              li.navbar-text signed in as #{{current_user.email}}
+              li = button_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-default navbar-btn'
           - else
             = button_to "Sign in", new_session_path(:user), method: :get, class: 'btn btn-default navbar-btn'
