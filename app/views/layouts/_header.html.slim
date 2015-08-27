@@ -9,15 +9,26 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
       a.navbar-brand href=root_path  SpacialDB
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li.active
-          a href="/"  Home
+        - if params[:controller] == 'home'
+          li.active
+            a href="/"  Home
+        - else
+          li
+            a href="/"  Home
+
         li
           a href="#about"  About
         li
           a href="#contact"  Contact
-        li
-          - if user_signed_in?
-            a href="/instances"  Instances
+
+        - if user_signed_in?
+          - if params[:controller] == 'instances'
+            li.active
+              a href="/instances"  Instances
+          - else
+            li
+              a href="/instances"  Instances
+
       ul.nav.navbar-nav.navbar-right
         li
           - if user_signed_in?
