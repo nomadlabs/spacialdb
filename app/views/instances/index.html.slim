@@ -2,6 +2,10 @@
   .col-md-10
     h1 Instances
 
+    - if @instances.length > 14
+      = link_to new_instance_path, class: 'btn btn-primary margin-button'
+        span.glyphicon.glyphicon-plus
+        span  New Instance
     - if @instances.empty?
       = "You don't have any instances, create one!"
     - else
@@ -25,9 +29,13 @@
                   span.label.label-danger unpaid
                 - if instance.status == "paid"
                   span.label.label-success paid
-              td = link_to 'Show', instance
+              td
+                - if instance.status == "unpaid"
+                  = link_to 'Show and Pay', instance
+                - if instance.status == "paid"
+                  = link_to 'Show', instance
               td = link_to 'Edit', edit_instance_path(instance)
               td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
-    br
-    br
-    = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
+    = link_to new_instance_path, class: 'btn btn-primary margin-button'
+      span.glyphicon.glyphicon-plus
+      span  New Instance
