@@ -3,7 +3,7 @@ br
 = form_for @instance, url: instance_path(@instance), method: "PATCH", html: {class: 'form-horizontal', role: 'form', id: 'new-instance-form' } do |f|
   == render 'devise/shared/error_messages'
   .form-group
-    = f.label 'my name:', class: "col-sm-2 control-label"
+    = f.label 'my name', class: "col-sm-2 control-label"
     .col-sm-6
       = f.text_field :name, class: "form-control", autofocus: true, value: @instance[:name]
   .form-group
@@ -28,7 +28,9 @@ br
               strong = region.name
   .form-group
     .col-sm-offset-2.col-sm-10
-      = button_to 'Update Instance', instance_path(@instance), class: 'btn btn-lg btn-success', id:'edit', type: 'submit' 
+      = button_to instance_path(@instance), class: 'btn btn-primary margin-button', id:'edit', type: 'submit'
+        span.glyphicon.glyphicon-saved
+        span  Update Instance
       br
       br
 	  = link_to "Back to instances", instances_path
