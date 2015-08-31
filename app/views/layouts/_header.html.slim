@@ -12,9 +12,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
         li class=('active' if current_page?(root_path))
           = link_to "Home", root_path
         li
-          a href="#about"  About
+          = link_to "About", '#'
         li
-          a href="#contact"  Contact
+          = link_to "Contact", '#'
         li class=('active' if current_page?(instances_path))
           - if user_signed_in?
             = link_to "Instances", instances_path
