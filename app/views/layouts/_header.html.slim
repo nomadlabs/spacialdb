@@ -9,15 +9,15 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
       a.navbar-brand href=root_path  SpacialDB
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li class=('active' if controller_name == 'home')
-          a href="/"  Home
+        li class=('active' if current_page?(root_path))
+          = link_to "Home", root_path
         li
           a href="#about"  About
         li
           a href="#contact"  Contact
-        li class=('active' if controller_name == 'instances')
+        li class=('active' if current_page?(instances_path))
           - if user_signed_in?
-            a href="/instances"  Instances
+            = link_to "Instances", instances_path
       ul.nav.navbar-nav.navbar-right
         li
           - if user_signed_in?
