@@ -13,6 +13,7 @@
         thead
           tr
             th Name
+            th Plan
             th Region
             th Payment Status
             th
@@ -23,6 +24,7 @@
           - @instances.each do |instance|
             tr
               td = instance.name
+              td = ((Plan.find_by(id: instance.subscription[:plan_id])).amount / 100).to_s + "€ / month"
               td = instance.region.name
               td
                 - if instance.status == "unpaid"
