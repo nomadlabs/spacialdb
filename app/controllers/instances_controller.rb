@@ -8,7 +8,7 @@ class InstancesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @instances = current_user.instances.all.order(sort_column + " " + sort_direction)
+    @instances = current_user.instances.all.includes(:region).includes(:subscription).order(sort_column + " " + sort_direction)
     respond_with(@instances)
   end
 
@@ -68,7 +68,8 @@ class InstancesController < ApplicationController
     end
 
     def sort_column
-      Instance.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      #Instance.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      ["name", "status", "regions.name", "subscriptions.plan_id"].include?(params[:sort]) ? params[:sort] : "name"
     end
 
     # Set global variables on every reload

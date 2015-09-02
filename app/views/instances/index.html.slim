@@ -13,22 +13,12 @@
         thead
           tr
             th
-              | Name
-              '
               = sortable "name", "Name"
             th
-              | Plan
-              '
-              = link_to "<span class=\"glyphicon glyphicon-sort\"></span>".html_safe
+              = sortable "subscriptions.plan_id", "Plan"
             th
-              | Region
-              '
-              = link_to "" do
-                i.glyphicon.glyphicon-sort
-              end
+              = sortable "regions.name", "Region"
             th
-              | Payment Status
-              '
               = sortable "status", "Payment Status"
             th
             th
