@@ -15,23 +15,21 @@
             th
               | Name
               '
-              a href=""
-                span.glyphicon.glyphicon-sort
+              = sortable "name", "Name"
             th
               | Plan
               '
-              a href=""
-                span.glyphicon.glyphicon-sort
+              = link_to "<span class=\"glyphicon glyphicon-sort\"></span>".html_safe
             th
               | Region
               '
-              a href=""
-                span.glyphicon.glyphicon-sort
+              = link_to "" do
+                i.glyphicon.glyphicon-sort
+              end
             th
               | Payment Status
               '
-              a href=""
-                span.glyphicon.glyphicon-sort
+              = sortable "status", "Payment Status"
             th
             th
             th
