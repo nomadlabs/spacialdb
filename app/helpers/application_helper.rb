@@ -15,4 +15,12 @@ module ApplicationHelper
     end
     (title + " " + link).html_safe
   end
+
+  def get_status(status)
+    if status == "paid"
+      content_tag(:span, "paid", :class => "label label-success")
+    else
+      content_tag(:span, "unpaid", :class => "label label-danger")
+    end
+  end
 end

@@ -68,7 +68,7 @@ class InstancesController < ApplicationController
     end
 
     def sort_column
-      #Instance.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      # whitelist
       ["name", "status", "regions.name", "subscriptions.plan_id"].include?(params[:sort]) ? params[:sort] : "name"
     end
 

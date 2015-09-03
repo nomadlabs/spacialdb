@@ -1,11 +1,10 @@
 .row
   .col-md-10
     h1 Instances
-
     - if @instances.length > 14
       = link_to new_instance_path, class: 'btn btn-primary margin-button'
         span.glyphicon.glyphicon-plus
-        span  New Instance
+        span New Instance
     - if @instances.empty?
       = "You don't have any instances, create one!"
     - else
@@ -23,18 +22,13 @@
             th
             th
             th
-
         tbody
           - @instances.order(:name).each do |instance|
             tr
               td = instance.name
               td = ((Plan.find_by(id: instance.subscription[:plan_id])).amount / 100).to_s + "€ / month"
               td = instance.region.name
-              td
-                - if instance.status == "unpaid"
-                  span.label.label-danger unpaid
-                - if instance.status == "paid"
-                  span.label.label-success paid
+              td = get_status instance.status
               td
                 - if instance.status == "unpaid"
                   = link_to 'Show and Pay', instance
