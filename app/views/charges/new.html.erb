@@ -1,4 +1,3 @@
-
 <%= form_tag charges_path, method: :post do %>
   <article>
     <label class="amount">
@@ -6,17 +5,20 @@
         <%= hidden_field_tag "instance_id", @instance[:id] %>
         <h1> Please pay for your instance:</h1>
         <span> Name: <%= @instance[:name] %></span><br>
-        <span>Amount: <%= number_to_currency((@myPlan.amount.to_i/ 100), :unit => "€") %> </span><br>
+        <span> Amount: <%= number_to_currency((@myPlan.amount.to_i/ 100), :unit => "€") %> </span><br>
         <span> Region: <%= @myRegion[:name] %></span><br>
     </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-currency='EUR'
+          data-currency="EUR"
+          data-name="SpacialDB"
           data-description="A month's subscription"
-          data-amount=<%= @myPlan.amount%>>
+          data-amount=<%= @myPlan.amount%>
+          data-locale="auto">
   </script>
+
 <% end %>
 <br>
 <%= link_to "Back to instances", instances_path %>

@@ -1,25 +1,29 @@
 .row
   .col-md-10
     h1 Instances
-
+    - if @instances.length > 14
+      = new_instance_button_to new_instance_path
     - if @instances.empty?
-          = "You don't have any instances, create one!"
-    -else
-      table class="table"
+      = "You don't have any instances, create one!"
+    - else
+      table class="table table-striped"
         thead
           tr
-            th Name
+            th = sortable "name", "Name"
+            th = sortable "subscriptions.plan_id", "Plan"
+            th = sortable "regions.name", "Region"
+            th = sortable "status", "Payment Status"
             th
             th
             th
-
         tbody
-          - @instances.each do |instance|
+          - @instances.order(:name).each do |instance|
             tr
               td = instance.name
-              td = link_to 'Show', instance
+              td = ((Plan.find_by(id: instance.subscription[:plan_id])).amount / 100).to_s + "€ / month"
+              td = instance.region.name
+              td = get_status instance.status
+              td = get_link_to instance, instance.status
               td = link_to 'Edit', edit_instance_path(instance)
-              td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure?'}, :method => :delete
-    br
-    br
-    = link_to 'New Instance', new_instance_path, class: 'btn btn-lg btn-success'
+              td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure you want to delete ' + instance.name + '?'}, :method => :delete
+    = new_instance_button_to new_instance_path

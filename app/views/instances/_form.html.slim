@@ -10,7 +10,7 @@
         - for plan in @plans
           .radio
             label
-              = radio_button_tag 'plan', plan.amount, checked = (plan.id == @plan.id)
+              = radio_button_tag 'plan', plan.amount, checked = (params[:plan] ? plan.id == @instance.subscription.plan_id : plan.id == @plan.id)
               strong = plan.name
               = ": " + plan.metadata['Memory'] + " Memory, "
               = plan.metadata['Processor'] + " Processor, "
@@ -22,16 +22,14 @@
         - for region in @regions
           .radio
             label
-              = radio_button_tag 'region', region.slug, checked = (region.slug == @region)
+              = radio_button_tag 'region', region.slug, checked = (params[:region] ? region.slug == (Region.find(@instance[:region_id])).slug : region.slug == @region)
               strong = region.name
   .form-group
     .col-sm-offset-2.col-sm-10
       / button#checkout.btn.btn-primary type="submit"  New Instance
-      = button_to 'Create Instance', instances_path, class: 'btn btn-lg btn-success', id:'checkout', type: 'submit' 
-
-
-
-
-
-
-
+      = button_to instances_path, class: 'btn btn-primary margin-button', id:'checkout', type: 'submit'
+        span.glyphicon.glyphicon-saved
+        span  Create Instance
+      br
+      br
+      = link_to "Back to instances", instances_path

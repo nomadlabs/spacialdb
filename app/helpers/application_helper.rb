@@ -7,4 +7,35 @@ module ApplicationHelper
       :notice => 'alert-info'
     }[flash_type.to_sym] || flash_type.to_s
   end
+
+  def sortable(column, title)
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link = link_to :sort => column, :direction => direction do
+      content_tag(:span, "", :class => "glyphicon glyphicon-sort")
+    end
+    (title + " " + link).html_safe
+  end
+
+  def get_status(status)
+    if status == "paid"
+      content_tag(:span, "paid", :class => "label label-success")
+    else
+      content_tag(:span, "unpaid", :class => "label label-danger")
+    end
+  end
+
+  def get_link_to(instance, status)
+    if status == "paid"
+      link_to 'Show', instance
+    else
+      link_to "Show and Pay", instance
+    end
+  end
+
+  def new_instance_button_to(path)
+    link_to new_instance_path, class: 'btn btn-primary margin-button' do
+      content_tag(:span, "", :class => "glyphicon glyphicon-plus") +
+      content_tag(:span, " New Instance")
+    end
+  end
 end
