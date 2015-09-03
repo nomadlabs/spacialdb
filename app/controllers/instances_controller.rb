@@ -44,7 +44,7 @@ class InstancesController < ApplicationController
   end
 
   def create
-    logger.info instance_params
+    # logger.info instance_params
     params.permit!.merge(
       stripe_token: params[:stripeToken]
     )
