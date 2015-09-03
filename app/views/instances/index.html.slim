@@ -2,9 +2,7 @@
   .col-md-10
     h1 Instances
     - if @instances.length > 14
-      = link_to new_instance_path, class: 'btn btn-primary margin-button'
-        span.glyphicon.glyphicon-plus
-        span New Instance
+      = new_instance_button_to new_instance_path
     - if @instances.empty?
       = "You don't have any instances, create one!"
     - else
@@ -28,6 +26,4 @@
               td = get_link_to instance, instance.status
               td = link_to 'Edit', edit_instance_path(instance)
               td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure you want to delete ' + instance.name + '?'}, :method => :delete
-    = link_to new_instance_path, class: 'btn btn-primary margin-button'
-      span.glyphicon.glyphicon-plus
-      span  New Instance
+    = new_instance_button_to new_instance_path

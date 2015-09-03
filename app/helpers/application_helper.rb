@@ -31,4 +31,11 @@ module ApplicationHelper
       link_to "Show and Pay", instance
     end
   end
+
+  def new_instance_button_to(path)
+    link_to new_instance_path, class: 'btn btn-primary margin-button' do
+      content_tag(:span, "", :class => "glyphicon glyphicon-plus") +
+      content_tag(:span, " New Instance")
+    end
+  end
 end
