@@ -22,7 +22,7 @@
         - for region in @regions
           .radio
             label
-              = radio_button_tag 'region', region.slug, checked = (@instance[:region_id] ? region.slug == (Region.find(@instance[:region_id])).slug : region.slug == @region)
+              = radio_button_tag 'region', region.slug, checked = (params[:region] ? region.slug == (Region.find(@instance[:region_id])).slug : region.slug == @region)
               strong = region.name
   .form-group
     .col-sm-offset-2.col-sm-10
