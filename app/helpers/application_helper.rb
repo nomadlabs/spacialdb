@@ -23,4 +23,12 @@ module ApplicationHelper
       content_tag(:span, "unpaid", :class => "label label-danger")
     end
   end
+
+  def get_link_to(instance, status)
+    if status == "paid"
+      link_to 'Show', instance
+    else
+      link_to "Show and Pay", instance
+    end
+  end
 end

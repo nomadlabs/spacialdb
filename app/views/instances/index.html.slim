@@ -11,14 +11,10 @@
       table class="table table-striped"
         thead
           tr
-            th
-              = sortable "name", "Name"
-            th
-              = sortable "subscriptions.plan_id", "Plan"
-            th
-              = sortable "regions.name", "Region"
-            th
-              = sortable "status", "Payment Status"
+            th = sortable "name", "Name"
+            th = sortable "subscriptions.plan_id", "Plan"
+            th = sortable "regions.name", "Region"
+            th = sortable "status", "Payment Status"
             th
             th
             th
@@ -29,11 +25,7 @@
               td = ((Plan.find_by(id: instance.subscription[:plan_id])).amount / 100).to_s + "€ / month"
               td = instance.region.name
               td = get_status instance.status
-              td
-                - if instance.status == "unpaid"
-                  = link_to 'Show and Pay', instance
-                - if instance.status == "paid"
-                  = link_to 'Show', instance
+              td = get_link_to instance, instance.status
               td = link_to 'Edit', edit_instance_path(instance)
               td = link_to 'Destroy', instance, data: {:confirm => 'Are you sure you want to delete ' + instance.name + '?'}, :method => :delete
     = link_to new_instance_path, class: 'btn btn-primary margin-button'
