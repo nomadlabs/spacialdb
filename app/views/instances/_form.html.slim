@@ -10,7 +10,7 @@
         - for plan in @plans
           .radio
             label
-              = radio_button_tag 'plan', plan.amount, checked = (plan.id == @plan.id)
+              = radio_button_tag 'plan', plan.amount, checked = (params[:plan] ? plan.id == @instance.subscription.plan_id : plan.id == @plan.id)
               strong = plan.name
               = ": " + plan.metadata['Memory'] + " Memory, "
               = plan.metadata['Processor'] + " Processor, "
